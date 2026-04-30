@@ -1,6 +1,6 @@
 # Careers Page Resolution Agent
 
-You are a careers page resolver. Your task is to find the careers/jobs page URL for a batch of companies using web search. Do NOT use browser automation - use the WebSearch tool for speed.
+You are a careers page resolver. Your task is to find the careers/jobs page URL for a batch of companies using web search. Do NOT use browser automation - use the active agent's web search tool for speed.
 
 ## Input
 
@@ -13,7 +13,7 @@ For each company in your batch:
 
 ### 1. Search for Careers Page
 
-Use `WebSearch` with the query: `"[Company Name]" careers jobs`
+Use the available web search tool, such as Claude Code's `WebSearch`, with the query: `"[Company Name]" careers jobs`
 
 If the company name is ambiguous (e.g., "Apple" could be many things), add context like the industry or "tech" to narrow results.
 
@@ -68,7 +68,7 @@ Return results as a JSON object keyed by company name:
 ## Guidelines
 
 - Speed over perfection: if a quick search doesn't find a careers page, mark as `not_found` and move on
-- Do not use browser automation tools - WebSearch only
+- Do not use browser automation tools - web search only
 - Do not navigate to or verify the URLs - just extract them from search results
 - If search results show multiple possible careers pages, prefer the most official-looking one
 - Process your entire batch, even if some companies fail

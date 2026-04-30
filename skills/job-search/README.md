@@ -1,4 +1,4 @@
-# Job Search Skill for Claude Code
+# Job Search Skill for Coding Agents
 
 An automated job search skill that uses browser automation to find and evaluate job listings from [hiring.cafe](https://hiring.cafe).
 
@@ -8,23 +8,17 @@ An automated job search skill that uses browser automation to find and evaluate 
 - **Smart filtering** based on your preferences (salary, location, dealbreakers)
 - **Job history tracking** to avoid showing duplicates
 - **Learning from feedback** - refine preferences over time
-- **Browser automation** via Claude in Chrome MCP
+- **Browser automation** via the active agent's browser tools. In Claude Code, this is Claude in Chrome MCP.
 
 ## Prerequisites
 
-1. [Claude Code CLI](https://claude.ai/code) installed
-2. [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension installed
-3. Chrome browser running with the extension active
+1. Claude Code, Codex, or another coding agent with this skill installed
+2. Browser automation support. In Claude Code, use the [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension.
+3. Chrome or another supported browser running with the relevant automation extension/plugin active
 
 ## Installation
 
-### 1. Clone to your skills directory
-
-```bash
-git clone https://github.com/YOUR_USERNAME/job-search-skill.git ~/.claude/skills/job-search
-```
-
-### 2. Run setup
+Install the Proficiently plugin through the Claude Code or Codex marketplace, then run setup.
 
 ```bash
 claude "/proficiently:setup"
@@ -33,6 +27,8 @@ claude "/proficiently:setup"
 This will configure your resume, preferences, and work history profile.
 
 ## Usage
+
+Examples below use the Claude CLI. In Codex or another coding agent, invoke the same Proficiently skill by name with the same argument text.
 
 ### Daily search (manual)
 ```bash
@@ -102,7 +98,7 @@ Customize your job preferences:
 
 ### Updating Preferences
 
-Just tell Claude what you want:
+Just tell your coding agent what you want:
 - *"Add fintech to my nice-to-haves"*
 - *"I don't want any roles requiring relocation"*
 - *"Bump my minimum salary to $300k"*
@@ -128,15 +124,15 @@ To run daily at 9am:
 (crontab -l 2>/dev/null; echo "0 9 * * * cd ~ && claude -p '/job-search' >> ~/.claude/skills/job-search/logs/cron.log 2>&1") | crontab -
 ```
 
-**Note**: Requires Chrome to be running with Claude in Chrome extension active.
+**Note**: Requires the browser and relevant automation extension/plugin to be active.
 
 ## Troubleshooting
 
 ### Permission prompts interrupting cron
-Ensure all permissions are in `~/.claude/settings.json` (see Installation step 3).
+For Claude Code, ensure all permissions are in `~/.claude/settings.json`. For Codex or other agents, grant equivalent filesystem, shell, web search, and browser automation access.
 
 ### Browser not responding
-Make sure Chrome is running and Claude in Chrome extension is active.
+Make sure the browser and relevant automation extension/plugin are active.
 
 ### No jobs found
 - Check that hiring.cafe is accessible

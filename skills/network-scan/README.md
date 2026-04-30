@@ -1,4 +1,4 @@
-# Network Scan Skill for Claude Code
+# Network Scan Skill for Coding Agents
 
 Proactively scan your LinkedIn contacts' companies for job openings that match your profile. Instead of waiting for jobs to appear on search engines, this skill starts from your network and checks if companies where you know someone are hiring.
 
@@ -12,12 +12,14 @@ Proactively scan your LinkedIn contacts' companies for job openings that match y
 
 ## Prerequisites
 
-1. [Claude Code CLI](https://claude.ai/code) installed
-2. [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension installed
-3. Chrome browser running with the extension active
+1. Claude Code, Codex, or another coding agent with this skill installed
+2. Browser automation support. In Claude Code, use the [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension.
+3. Chrome or another supported browser running with the relevant automation extension/plugin active
 4. LinkedIn contacts imported via `/proficiently:setup`
 
 ## Usage
+
+Examples below use the Claude CLI. In Codex or another coding agent, invoke the same Proficiently skill by name with the same argument text.
 
 ### Scan recent contacts (default: 25)
 ```bash
@@ -78,7 +80,7 @@ Supported careers page types:
 
 ### Updating the Cache
 
-Tell Claude to update entries:
+Tell your coding agent to update entries:
 - *"The careers page for Acme is actually acme.com/jobs"*
 - *"Skip Google from future scans"*
 
@@ -88,7 +90,7 @@ Tell Claude to update entries:
 Run `/proficiently:setup` and import your LinkedIn contacts CSV.
 
 ### Careers pages not resolving
-Make sure Chrome is running and the Claude in Chrome extension is active. Some small companies may not have public careers pages.
+Make sure the browser and relevant automation extension/plugin are active. Some small companies may not have public careers pages.
 
 ### Too many companies to scan
 Start with a smaller number: `/proficiently:network-scan 10`. Increase once you've confirmed it works.

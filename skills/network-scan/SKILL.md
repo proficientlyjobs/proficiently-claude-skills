@@ -83,13 +83,13 @@ Report: "X companies from cache, Y need resolution..."
 
 **Parallel resolution using subagents:**
 
-Take all companies needing resolution (stale + uncached) and split them into batches of 10. Spawn one subagent per batch using the Task tool (`subagent_type: "general-purpose"`). Run all batches in parallel.
+Take all companies needing resolution (stale + uncached) and split them into batches of 10. Spawn one subagent per batch using the active agent's delegation mechanism. In Claude Code, use the Task tool with `subagent_type: "general-purpose"`. In Codex, use subagents when available. Run all batches in parallel.
 
 Each subagent receives:
 - A batch of company names to resolve
 - Instructions from `scripts/resolve-careers.md`
 
-Each subagent uses `WebSearch` (NOT the browser) to find careers pages:
+Each subagent uses the available web search tool, such as Claude Code's `WebSearch` (NOT the browser), to find careers pages:
 1. Search: `"[Company Name]" careers jobs site:[company domain if known]`
 2. From the search results, identify the careers/jobs page URL
 3. Classify the URL type:
@@ -119,7 +119,7 @@ Report progress: "Resolved X new careers pages, Y from cache, Z not found."
 
 Take all companies with a valid `careers_url` (skip `not_found` and `ignored` entries). Split them into batches of 5 companies each.
 
-**Spawn parallel subagents** using the Task tool (`subagent_type: "general-purpose"`). Run all batches in parallel (up to 5 concurrent subagents to avoid overwhelming the browser).
+**Spawn parallel subagents** using the active agent's delegation mechanism. In Claude Code, use the Task tool with `subagent_type: "general-purpose"`. In Codex, use subagents when available. Run all batches in parallel (up to 5 concurrent subagents to avoid overwhelming the browser).
 
 Each subagent receives:
 - A batch of companies (name, careers_url, ATS type, network contacts)
@@ -280,7 +280,7 @@ Structure user-facing output with these sections:
 
 ## Permissions Required
 
-Add to `~/.claude/settings.json`:
+Claude Code permissions: add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -295,3 +295,5 @@ Add to `~/.claude/settings.json`:
   }
 }
 ```
+
+Codex or other coding agents: grant equivalent access to read/write `~/.proficiently/**`, read the installed skill files, use web search for careers-page resolution, and use browser automation tools for scanning careers pages.

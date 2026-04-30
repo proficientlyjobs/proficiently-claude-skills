@@ -1,0 +1,30 @@
+{
+  "name": "proficiently",
+  "version": "1.1.0",
+  "description": "AI-powered job search, resume tailoring, and cover letter writing",
+  "author": {
+    "name": "Proficiently",
+    "email": "zak@proficiently.com",
+    "url": "https://proficiently.com"
+  },
+  "homepage": "https://proficiently.com",
+  "repository": "https://github.com/proficientlyjobs/proficiently-claude-skills",
+  "license": "MIT",
+  "keywords": ["job-search", "resume", "cover-letter", "career", "apply"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Proficiently",
+    "shortDescription": "Job search, resume tailoring, cover letters, and applications",
+    "longDescription": "Proficiently helps you search for jobs, tailor resumes, write cover letters, scan your network for openings, and fill job applications using your saved profile and preferences.",
+    "developerName": "Proficiently",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write", "Browser"],
+    "websiteURL": "https://proficiently.com",
+    "defaultPrompt": [
+      "Set up my job search profile.",
+      "Find jobs that match my preferences.",
+      "Tailor my resume for this job."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

@@ -233,13 +233,13 @@ After the user approves (with any edits), cache any new answers in `DATA_DIR/app
 
 After approval, fill everything in one pass.
 
-**Delegate to the subagent.** Invoke `scripts/fill-page.md` with:
+**Delegate to a subagent when the active coding agent supports delegation.** Invoke `scripts/fill-page.md` with:
 - ATS type (lever/greenhouse/workday/unknown)
 - The approved field→value mapping (all answers, not just application data)
 - Tab ID
 - File paths for resume and cover letter uploads
 
-The subagent fills all fields on the current page, then returns what was filled and what remains.
+The subagent, or the main agent when delegation is unavailable, fills all fields on the current page, then returns what was filled and what remains.
 
 **For multi-page forms (Workday):**
 1. Fill current page → click "Save and Continue"
@@ -248,7 +248,7 @@ The subagent fills all fields on the current page, then returns what was filled 
 4. Repeat until reaching the review page
 
 **File upload handling:**
-MCP tools can only upload images via `upload_image`. For PDF/DOCX resume and cover letter uploads, tell the user the file path and ask them to upload manually. This is a known limitation — include the path in the Step 6 summary so the user can upload while reviewing.
+Some browser automation tools can only upload images, such as Claude in Chrome MCP's `upload_image`. For PDF/DOCX resume and cover letter uploads, use native file upload support if the active agent provides it; otherwise tell the user the file path and ask them to upload manually. Include the path in the Step 6 summary so the user can upload while reviewing.
 
 ### Step 8: Review Before Submit
 
@@ -348,7 +348,7 @@ Structure user-facing output with these sections:
 
 ## Permissions Required
 
-Add to `~/.claude/settings.json`:
+Claude Code permissions: add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -363,3 +363,5 @@ Add to `~/.claude/settings.json`:
   }
 }
 ```
+
+Codex or other coding agents: grant equivalent access to read/write `~/.proficiently/**`, read the installed skill files, and use the available browser automation tools for application forms.

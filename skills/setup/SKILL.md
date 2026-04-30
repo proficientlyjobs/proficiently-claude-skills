@@ -176,7 +176,7 @@ Structure the final summary output with these sections:
 
 ## Permissions Required
 
-Add to `~/.claude/settings.json`:
+Claude Code permissions: add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -189,3 +189,5 @@ Add to `~/.claude/settings.json`:
   }
 }
 ```
+
+Codex or other coding agents: grant equivalent access to read/write `~/.proficiently/**`.

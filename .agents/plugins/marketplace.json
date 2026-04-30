@@ -1,0 +1,20 @@
+{
+  "name": "proficiently",
+  "interface": {
+    "displayName": "Proficiently"
+  },
+  "plugins": [
+    {
+      "name": "proficiently",
+      "source": {
+        "source": "local",
+        "path": "./plugins/proficiently"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

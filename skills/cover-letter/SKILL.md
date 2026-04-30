@@ -46,7 +46,7 @@ Resolve the data directory, then check prerequisites per `shared/references/prer
 **If `$ARGUMENTS` is a URL:**
 - Check if a job folder already exists for this company in `DATA_DIR/jobs/`
 - If yes, read the existing `posting.md` and `resume.md`
-- If no, use Claude in Chrome MCP tools to fetch the job posting per `shared/references/browser-setup.md`
+- If no, use the available browser automation tools to fetch the job posting per `shared/references/browser-setup.md`
 - Save the posting to `DATA_DIR/jobs/[company-slug]-[date]/posting.md` if not already saved
 
 If the page can't be loaded, ask the user to paste the job description directly.
@@ -115,7 +115,7 @@ Structure user-facing output with these sections:
 
 ## Permissions Required
 
-Add to `~/.claude/settings.json`:
+Claude Code permissions: add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -130,3 +130,5 @@ Add to `~/.claude/settings.json`:
   }
 }
 ```
+
+Codex or other coding agents: grant equivalent access to read/write `~/.proficiently/**`, read the installed skill files, and use the available browser automation tools for fetching job postings.

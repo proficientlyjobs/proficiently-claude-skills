@@ -44,7 +44,7 @@ You already have a tab ID — do not create a new tab.
 
 ## File Upload Fields
 
-MCP tools can only upload images. For resume/cover letter PDF/DOCX uploads:
+Some browser automation tools can only upload images. For resume/cover letter PDF/DOCX uploads:
 - Record the field label and the file path
 - Flag as "needs_manual_upload" in the output
 - Do NOT attempt to upload non-image files

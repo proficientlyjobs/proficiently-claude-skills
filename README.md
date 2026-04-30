@@ -1,6 +1,6 @@
 # Proficiently
 
-A Claude Code plugin for AI-powered job searching, resume tailoring, and cover letter writing. Built by [Proficiently](https://proficiently.com).
+A Claude Code and Codex plugin marketplace for AI-powered job searching, resume tailoring, and cover letter writing. Built by [Proficiently](https://proficiently.com).
 
 > **Want someone to handle your entire job search?** Proficiently finds you jobs, tailors your resume and cover letters, applies on your behalf, and gets you in touch with hiring managers. Visit [proficiently.com](https://proficiently.com) to get started.
 
@@ -61,6 +61,12 @@ Then run setup:
 /proficiently:setup
 ```
 
+### Option C: Codex
+
+This repository includes a Codex marketplace at `.agents/plugins/marketplace.json`. Add or open this repo as a Codex plugin marketplace, then install the `proficiently` plugin from the local marketplace entry.
+
+The Codex marketplace points to `./plugins/proficiently`, which exposes the same `skills/` and `shared/` content used by the Claude Code marketplace.
+
 ### After installing
 
 Setup will create `~/.proficiently/`, prompt you for your resume, configure your job preferences, optionally import your LinkedIn contacts, and conduct a work history interview.
@@ -74,17 +80,27 @@ cp /path/to/your/resume.pdf ~/.proficiently/resume/
 
 ## Prerequisites
 
-- [Claude Cowork](https://claude.com/product/cowork) desktop app **or** [Claude Code CLI](https://claude.ai/code)
-- [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension (for browser automation)
-- Chrome browser running with the extension active
+- [Claude Cowork](https://claude.com/product/cowork), [Claude Code CLI](https://claude.ai/code), or Codex with plugin marketplace support
+- Browser automation support for web-backed skills. In Claude Code, use the [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension. In Codex, use the available browser automation plugin/tools for the session.
+- Chrome or another supported browser running with the relevant automation extension/plugin active
 
 ## File Structure
 
 **Plugin (installed via marketplace):**
 ```
 proficiently-claude-skills/
+├── .agents/
+│   └── plugins/
+│       └── marketplace.json            # Codex marketplace config
 ├── .claude-plugin/
-│   └── plugin.json                     # Plugin manifest
+│   ├── marketplace.json                # Claude marketplace config
+│   └── plugin.json                     # Claude plugin manifest
+├── plugins/
+│   └── proficiently/
+│       ├── .codex-plugin/
+│       │   └── plugin.json             # Codex plugin manifest
+│       ├── skills -> ../../skills      # Shared skill source
+│       └── shared -> ../../shared      # Shared references/templates
 ├── shared/
 │   ├── templates/
 │   │   └── profile.md                  # Work history profile template

@@ -50,11 +50,11 @@ Extract search terms from:
 
 ### Step 2: Browser Search
 
-Use Claude in Chrome MCP tools per `shared/references/browser-setup.md`, navigating to https://hiring.cafe. For each search term, enter the query and apply relevant filters (date posted, location, etc.).
+Use the available browser automation tools per `shared/references/browser-setup.md`, navigating to https://hiring.cafe. For each search term, enter the query and apply relevant filters (date posted, location, etc.).
 
 **Extracting results — IMPORTANT:** Do NOT use `get_page_text` on hiring.cafe or any large job listing page. It returns the entire page content and will blow out the context window.
 
-Instead, extract job listings using `javascript_tool` to pull only structured data:
+Instead, extract job listings using JavaScript evaluation, such as Claude in Chrome MCP's `javascript_tool`, to pull only structured data:
 
 ```javascript
 // Extract visible job listing data from the page
@@ -67,7 +67,7 @@ Array.from(document.querySelectorAll('[class*="job"], [class*="listing"], [class
 
 If that selector doesn't match, take a screenshot to understand the page structure, then write a targeted JS selector for the specific site. The goal is to extract just the listing rows (title, company, location, salary) — never the full page.
 
-As a fallback, use `read_page` (NOT `get_page_text`) and scan for listing elements.
+As a fallback, use structured page reading, such as Claude in Chrome MCP's `read_page` (NOT `get_page_text`), and scan for listing elements.
 
 **Note:** Hiring.cafe is just our search tool. Don't share hiring.cafe links with the user — you'll resolve direct employer URLs for the top matches in Step 5.
 
@@ -155,7 +155,7 @@ Structure user-facing output with these sections:
 
 ## Permissions Required
 
-Add to `~/.claude/settings.json`:
+Claude Code permissions: add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -171,3 +171,5 @@ Add to `~/.claude/settings.json`:
   }
 }
 ```
+
+Codex or other coding agents: grant equivalent access to read/write `~/.proficiently/**`, read the installed skill files, run `crontab` only when configuring scheduled searches, and use the available browser automation tools for job searches.

@@ -43,7 +43,7 @@ Otherwise, ask for a job URL.
 
 Accept a job URL from the user (from `$ARGUMENTS` or by asking).
 
-Use Claude in Chrome MCP tools to fetch the job posting per `shared/references/browser-setup.md`.
+Use the available browser automation tools to fetch the job posting per `shared/references/browser-setup.md`.
 
 Parse and extract:
 - **Job title** and level (IC vs. manager, seniority)
@@ -225,7 +225,7 @@ Structure user-facing output with these sections:
 
 ## Permissions Required
 
-Add to `~/.claude/settings.json`:
+Claude Code permissions: add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -240,3 +240,5 @@ Add to `~/.claude/settings.json`:
   }
 }
 ```
+
+Codex or other coding agents: grant equivalent access to read/write `~/.proficiently/**`, read the installed skill files, and use the available browser automation tools for fetching job postings.

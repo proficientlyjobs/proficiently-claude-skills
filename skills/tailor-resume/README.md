@@ -1,4 +1,4 @@
-# Resume Tailoring Skill for Claude Code
+# Resume Tailoring Skill for Coding Agents
 
 Create tailored resumes that make you the obvious candidate for any specific job posting. Uses your resume and work history profile to craft compelling, targeted resumes.
 
@@ -11,11 +11,13 @@ Create tailored resumes that make you the obvious candidate for any specific job
 
 ## Prerequisites
 
-1. [Claude Code CLI](https://claude.ai/code) installed
-2. [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension installed
+1. Claude Code, Codex, or another coding agent with this skill installed
+2. Browser automation support. In Claude Code, use the [Claude in Chrome](https://chromewebstore.google.com/detail/claude-in-chrome) extension.
 3. Resume and profile set up via `/proficiently:setup`
 
 ## Usage
+
+Examples below use the Claude CLI. In Codex or another coding agent, invoke the same Proficiently skill by name with the same argument text.
 
 ### Tailor resume for a job
 

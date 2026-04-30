@@ -8,6 +8,8 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch, WebSearch, mcp__cl
 
 Poll Telegram for incoming messages and route them to the appropriate Proficiently skill. Runs headlessly via `/loop 1m /proficiently:jobsearch-telegram`.
 
+The `allowed-tools` metadata is for Claude Code. Codex or other coding agents should grant equivalent filesystem, shell, web search, and browser automation access in their own permission systems.
+
 ## First-Time Setup
 
 Before this skill can run, the user must create a Telegram bot and configure it. If `DATA_DIR/telegram-config.md` does not exist, walk the user through setup:
@@ -338,7 +340,7 @@ After every poll cycle that does actual work (not silent exits), you MUST:
 
 ## Permissions Required
 
-Add to `~/.claude/settings.json`:
+Claude Code permissions: add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -355,3 +357,5 @@ Add to `~/.claude/settings.json`:
   }
 }
 ```
+
+Codex or other coding agents: grant equivalent access to run `curl`/`jq`, read/write `~/.proficiently/**`, read the installed skill files, use web search, and use the available browser automation tools.
