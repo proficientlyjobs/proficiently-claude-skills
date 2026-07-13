@@ -14,6 +14,7 @@ A Claude Code plugin for AI-powered job searching, resume tailoring, and cover l
 | [Job Search](./skills/job-search/) | `/proficiently:job-search` | Automated job search with smart filtering and network matching |
 | [Tailor Resume](./skills/tailor-resume/) | `/proficiently:tailor-resume` | Create tailored resumes for specific job postings |
 | [Cover Letter](./skills/cover-letter/) | `/proficiently:cover-letter` | Write natural, persuasive cover letters |
+| [LinkedIn DM](./skills/linkedin-dm/) | `/proficiently:linkedin-dm` | Write short, tailored LinkedIn outreach messages to recruiters, optimized for open/reply rate |
 | [Network Scan](./skills/network-scan/) | `/proficiently:network-scan` | Scan your contacts' companies for matching job openings |
 | [Apply](./skills/apply/) | `/proficiently:apply` | Fill out job applications on Greenhouse, Lever, and Workday |
 | [Telegram Loop](./skills/jobsearch-telegram/) | `/proficiently:jobsearch-telegram` | Headless job search assistant via Telegram — apply, search, and check status by chat |
@@ -24,9 +25,10 @@ A Claude Code plugin for AI-powered job searching, resume tailoring, and cover l
 2. **`/proficiently:job-search`** finds jobs that match your preferences and resume, flags companies where you have connections
 3. **`/proficiently:tailor-resume`** rewrites your resume for a specific job posting, saves the job posting and tailored resume together
 4. **`/proficiently:cover-letter last`** writes a cover letter using the most recent job's posting and tailored resume
-5. **`/proficiently:apply last`** fills out the application form on Greenhouse, Lever, or Workday using your tailored resume and cover letter
-6. **`/proficiently:network-scan`** scans your LinkedIn contacts' companies for matching openings (leverages your network for warm intros)
-7. **`/loop 1m /proficiently:jobsearch-telegram`** runs the Telegram bot in the background — send a job URL or "search [keywords]" from your phone to trigger any of the above automatically
+5. **`/proficiently:linkedin-dm last`** writes a short connection note and direct message for reaching out to a recruiter or hiring manager on LinkedIn
+6. **`/proficiently:apply last`** fills out the application form on Greenhouse, Lever, or Workday using your tailored resume and cover letter
+7. **`/proficiently:network-scan`** scans your LinkedIn contacts' companies for matching openings (leverages your network for warm intros)
+8. **`/loop 1m /proficiently:jobsearch-telegram`** runs the Telegram bot in the background — send a job URL or "search [keywords]" from your phone to trigger any of the above automatically
 
 All skills share a `~/.proficiently/` directory for personal files. Each job application gets its own folder containing the posting, tailored resume, and cover letter.
 
@@ -107,6 +109,9 @@ proficiently-claude-skills/
 │   │   ├── SKILL.md
 │   │   └── scripts/
 │   ├── cover-letter/
+│   │   ├── SKILL.md
+│   │   └── scripts/
+│   ├── linkedin-dm/
 │   │   ├── SKILL.md
 │   │   └── scripts/
 │   ├── network-scan/
