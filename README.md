@@ -11,11 +11,11 @@ A Claude Code plugin for AI-powered job searching, resume tailoring, and cover l
 | Skill | Command | Description |
 |-------|---------|-------------|
 | [Setup](./skills/setup/) | `/proficiently:setup` | One-time onboarding: resume, preferences, LinkedIn contacts, and work history interview |
-| [Job Search](./skills/job-search/) | `/proficiently:job-search` | Automated job search with smart filtering and network matching |
+| [Job Search](./skills/job-search/) | `/proficiently:job-search` | Automated job search across hiring.cafe and LinkedIn with smart filtering and network matching |
 | [Tailor Resume](./skills/tailor-resume/) | `/proficiently:tailor-resume` | Create tailored resumes for specific job postings |
 | [Cover Letter](./skills/cover-letter/) | `/proficiently:cover-letter` | Write natural, persuasive cover letters |
 | [Network Scan](./skills/network-scan/) | `/proficiently:network-scan` | Scan your contacts' companies for matching job openings |
-| [Apply](./skills/apply/) | `/proficiently:apply` | Fill out job applications on Greenhouse, Lever, and Workday |
+| [Apply](./skills/apply/) | `/proficiently:apply` | Fill out job applications on Greenhouse, Lever, Workday, and LinkedIn Easy Apply |
 | [Telegram Loop](./skills/jobsearch-telegram/) | `/proficiently:jobsearch-telegram` | Headless job search assistant via Telegram — apply, search, and check status by chat |
 
 ## How They Work Together
@@ -24,7 +24,7 @@ A Claude Code plugin for AI-powered job searching, resume tailoring, and cover l
 2. **`/proficiently:job-search`** finds jobs that match your preferences and resume, flags companies where you have connections
 3. **`/proficiently:tailor-resume`** rewrites your resume for a specific job posting, saves the job posting and tailored resume together
 4. **`/proficiently:cover-letter last`** writes a cover letter using the most recent job's posting and tailored resume
-5. **`/proficiently:apply last`** fills out the application form on Greenhouse, Lever, or Workday using your tailored resume and cover letter
+5. **`/proficiently:apply last`** fills out the application form on Greenhouse, Lever, Workday, or LinkedIn Easy Apply using your tailored resume and cover letter
 6. **`/proficiently:network-scan`** scans your LinkedIn contacts' companies for matching openings (leverages your network for warm intros)
 7. **`/loop 1m /proficiently:jobsearch-telegram`** runs the Telegram bot in the background — send a job URL or "search [keywords]" from your phone to trigger any of the above automatically
 
@@ -93,7 +93,7 @@ proficiently-claude-skills/
 │       ├── data-directory.md           # Data directory resolution algorithm
 │       ├── prerequisites.md            # Prerequisites checking by skill
 │       ├── browser-setup.md            # Browser automation setup sequence
-│       ├── ats-patterns.md            # ATS navigation patterns (Greenhouse, Lever, Workday)
+│       ├── ats-patterns.md            # ATS navigation patterns (Greenhouse, Lever, Workday, LinkedIn)
 │       └── priority-hierarchy.md       # Instruction priority hierarchy
 ├── skills/
 │   ├── setup/

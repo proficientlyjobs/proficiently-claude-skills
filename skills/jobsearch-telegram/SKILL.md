@@ -110,7 +110,7 @@ Parse each message and classify:
 
 | Message Type | Detection | Route |
 |---|---|---|
-| Job URL | Contains `greenhouse.io`, `lever.co`, `myworkdayjobs.com`, `ashbyhq.com`, or other job board URL | Step 4a: Apply |
+| Job URL | Contains `greenhouse.io`, `lever.co`, `myworkdayjobs.com`, `linkedin.com/jobs`, `ashbyhq.com`, or other job board URL | Step 4a: Apply |
 | "apply last" / "apply" | Text matches `apply` (with optional `last`/`current`) | Step 4a: Apply |
 | "search for ..." | Text starts with `search`, `find`, `look for` | Step 4b: Search |
 | "tailor resume for ..." | Text mentions `tailor`/`resume` + context | Step 4c: Tailor |

@@ -1,6 +1,6 @@
 ---
 name: apply
-description: Fill out a job application on Greenhouse, Lever, or Workday
+description: Fill out a job application on Greenhouse, Lever, Workday, or LinkedIn Easy Apply
 argument-hint: "job URL, 'last' to use most recent job, or 'current' to fill the active browser tab"
 ---
 
@@ -8,7 +8,7 @@ argument-hint: "job URL, 'last' to use most recent job, or 'current' to fill the
 
 > **Priority hierarchy**: See `shared/references/priority-hierarchy.md` for conflict resolution.
 
-Fill out job application forms on Greenhouse, Lever, and Workday using browser automation.
+Fill out job application forms on Greenhouse, Lever, Workday, and LinkedIn Easy Apply using browser automation.
 
 ## Quick Start
 
@@ -126,6 +126,12 @@ Set up browser per `shared/references/browser-setup.md` (`tabs_context` → `tab
 - If a landing page appears with Autofill/Manual options, click "Apply Manually".
 - If an auth gate appears, **tell the user to sign in, then say "continue" when ready**. Account creation is a prohibited action — the user must handle authentication themselves.
 
+**LinkedIn Easy Apply** (`linkedin.com/jobs/view/...`):
+- Requires the user to be signed into LinkedIn. If a login wall appears, ask the user to sign in, then say "continue".
+- If the button says "Easy Apply", click it to open the multi-step application modal — follow the LinkedIn Easy Apply pattern in `shared/references/ats-patterns.md`.
+- If the button says just "Apply", it opens the employer's ATS in a new tab — detect that ATS and follow its pattern instead.
+- Do NOT use `get_page_text` on LinkedIn pages — huge pages will blow out the context window. Use `read_page(filter="interactive")` scoped to the modal.
+
 **Unknown ATS**:
 - Navigate to the URL, take a screenshot
 - Attempt to identify the form. If unrecognizable, tell the user and ask for guidance.
@@ -234,7 +240,7 @@ After the user approves (with any edits), cache any new answers in `DATA_DIR/app
 After approval, fill everything in one pass.
 
 **Delegate to the subagent.** Invoke `scripts/fill-page.md` with:
-- ATS type (lever/greenhouse/workday/unknown)
+- ATS type (lever/greenhouse/workday/linkedin/unknown)
 - The approved field→value mapping (all answers, not just application data)
 - Tab ID
 - File paths for resume and cover letter uploads
@@ -270,7 +276,7 @@ Create `DATA_DIR/jobs/[company-slug]-[date]/applied.md`:
 # Application Log
 
 - **Date**: YYYY-MM-DD
-- **ATS**: Greenhouse/Lever/Workday
+- **ATS**: Greenhouse/Lever/Workday/LinkedIn Easy Apply
 - **Status**: Submitted / Draft (not submitted)
 - **Notes**: [any relevant notes]
 ```
@@ -333,6 +339,8 @@ Match form field labels (case-insensitive, fuzzy) to application data:
 - `read_page(filter="interactive")` only returns viewport-visible elements. Must scroll top-to-bottom, calling `read_page` at each scroll position.
 - Radio buttons are NOT returned by `read_page` — use `find` tool or `computer` click at coordinates.
 - Dropdowns are `button` elements that open popup panels. Click the button → use `find` or `read_page` to locate options → click the option. For hierarchical dropdowns (like "How Did You Hear"), search within the popup using the Search textbox.
+
+**LinkedIn Easy Apply**: Multi-step modal with a progress percentage in the header; contact info is prefilled from the profile, and fields are standard inputs usable with `form_input`. Never fabricate answers to screening questions — ask the user. Always confirm before the final "Submit application" click. See the LinkedIn Easy Apply section of `shared/references/ats-patterns.md`.
 
 ---
 

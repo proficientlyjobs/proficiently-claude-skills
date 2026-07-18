@@ -1,6 +1,6 @@
 # ATS Navigation Patterns
 
-Browser automation patterns for the three major Applicant Tracking Systems. Findings from live testing on real application forms.
+Browser automation patterns for the three major Applicant Tracking Systems plus LinkedIn Easy Apply. Findings from live testing on real application forms.
 
 ## Greenhouse
 
@@ -90,19 +90,42 @@ JSON.stringify({
 
 ---
 
+## LinkedIn Easy Apply
+
+**Detection**: Job URL matches `linkedin.com/jobs/view/{jobId}` AND the button on the posting says **"Easy Apply"** (with the LinkedIn logo). If the button says just **"Apply"**, the job is NOT LinkedIn-hosted — clicking it opens the employer's ATS in a new tab; follow the matching ATS pattern above instead.
+
+**Embedding**: NO iframe. Application opens as a modal dialog over the job posting, on linkedin.com. Requires the user to be signed into LinkedIn — if a login wall appears, stop and ask the user to sign in.
+
+**MCP tool access**: Fields in the modal are standard inputs — `read_page`, `form_input`, and `computer` all work. Do NOT use `get_page_text` on LinkedIn pages (huge pages; context window risk) — use `read_page(filter="interactive")` or `javascript_tool` scoped to the modal.
+
+**Multi-step modal flow** (a progress percentage shows in the modal header):
+1. Click "Easy Apply" → modal opens
+2. **Contact info** — prefilled from the user's LinkedIn profile (email, phone, phone country code). Verify, correct if needed.
+3. **Resume** — upload a file or select a previously uploaded resume. PDF/DOCX uploads may need manual user action (MCP upload limitation).
+4. **Additional questions** — employer-defined screening questions (years of experience, work authorization, salary expectations, etc.), rendered as standard text inputs, radios, and dropdowns.
+5. Click "Next" through remaining steps → "Review" shows all answers
+6. **"Submit application"** button completes it
+
+**IMPORTANT**: Always pause and confirm with the user before clicking the final "Submit application" button. Never answer screening questions with fabricated data — if an answer isn't in the application data or resume, ask the user.
+
+**Apply button text**: "Easy Apply" (LinkedIn-hosted) vs. "Apply" (external ATS).
+
+---
+
 ## Automation Strategy Summary
 
-| Feature | Greenhouse | Lever | Workday |
-|---------|-----------|-------|---------|
-| Iframe | Yes (cross-origin) | No | No |
-| `read_page` works | No (needs workaround) | Yes | Yes |
-| `form_input` works | No (needs workaround) | Yes | Yes (after auth) |
-| Auth required | No | No | Yes (account) |
-| Form type | Single page | Single page | Multi-step wizard |
-| Apply button | "Apply for this job" | "APPLY FOR THIS JOB" | "Apply Now" → landing page |
-| Difficulty | Medium | Easy | Hard |
+| Feature | Greenhouse | Lever | Workday | LinkedIn Easy Apply |
+|---------|-----------|-------|---------|---------------------|
+| Iframe | Yes (cross-origin) | No | No | No (modal) |
+| `read_page` works | No (needs workaround) | Yes | Yes | Yes |
+| `form_input` works | No (needs workaround) | Yes | Yes (after auth) | Yes (after sign-in) |
+| Auth required | No | No | Yes (account) | Yes (LinkedIn session) |
+| Form type | Single page | Single page | Multi-step wizard | Multi-step modal |
+| Apply button | "Apply for this job" | "APPLY FOR THIS JOB" | "Apply Now" → landing page | "Easy Apply" |
+| Difficulty | Medium | Easy | Hard | Easy (once signed in) |
 
 **Recommended approach by ATS**:
 - **Lever**: Direct form filling via `form_input` with refs from `read_page`. Most straightforward.
 - **Greenhouse**: Extract iframe tokens → navigate to direct form URL → fill fields. Requires extra navigation step.
 - **Workday**: User must sign in first. Then assist with multi-step form filling across 5 wizard pages + review. Must scroll through each page to discover all fields since `read_page` only returns viewport-visible elements. Radio buttons require coordinate-based clicking. Use validation errors ("Save and Continue" with empty fields) to discover all required fields on a page.
+- **LinkedIn Easy Apply**: User must be signed into LinkedIn. Step through the modal with `form_input` on standard fields, confirm with the user before "Submit application", and ask the user for any screening answer you don't have.

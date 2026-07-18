@@ -1,6 +1,6 @@
 # Job Search Skill for Claude Code
 
-An automated job search skill that uses browser automation to find and evaluate job listings from [hiring.cafe](https://hiring.cafe).
+An automated job search skill that uses browser automation to find and evaluate job listings from [hiring.cafe](https://hiring.cafe) and [LinkedIn Jobs](https://www.linkedin.com/jobs/) (requires being signed into LinkedIn in Chrome).
 
 ## Features
 
@@ -140,6 +140,7 @@ Make sure Chrome is running and Claude in Chrome extension is active.
 
 ### No jobs found
 - Check that hiring.cafe is accessible
+- For LinkedIn results, make sure you're signed into LinkedIn in Chrome (a login wall causes LinkedIn to be skipped)
 - Try different search terms
 - Verify your matching rules aren't too restrictive
 
@@ -147,6 +148,7 @@ Make sure Chrome is running and Claude in Chrome extension is active.
 
 ### v0.1 - Current
 - [x] Automated job search on hiring.cafe
+- [x] LinkedIn Jobs as a second search source
 - [x] Smart filtering (salary, location, dealbreakers)
 - [x] Job history tracking
 - [x] Daily cron automation
@@ -171,7 +173,7 @@ Make sure Chrome is running and Claude in Chrome extension is active.
 - [ ] Alert when target companies post new roles
 
 ### Future Ideas
-- Support for additional job boards (LinkedIn, Indeed, etc.)
+- Support for additional job boards (Indeed, etc.)
 - Email digest of daily results
 - Integration with ATS/application tracking
 - Interview prep based on job description + work history
